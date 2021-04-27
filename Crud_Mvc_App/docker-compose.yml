@@ -11,23 +11,20 @@ services:
         - mssql-server.env
     ports:
       - 1433:1433
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2017-CU20-ubuntu-16.04
     volumes:
-      - mssql-server-volume:/var/lib/mysql   
+      # - mssql-server-volume:/var/lib/mysql
+      - sql1data:/var/opt/mssql
   mvc-app:
-    # environment:
-    #   MongoDB__Host: mongo
-    #   MongoDB__Port: 27017
     # build: .
     env_file: 
       - crud-mvc-app.env
-    image: titario/crudmvcapp:1.0
+    image: titario/crudmvcapp:2.0
     restart: always
     ports:
       - "4443:80"
     depends_on:
       - mssql-server
-    #image: titario/mongo-repository-example:1.0
 
 volumes:
-  mssql-server-volume:
+  sql1data:
