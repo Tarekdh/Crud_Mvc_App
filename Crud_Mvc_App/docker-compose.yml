@@ -1,0 +1,31 @@
+﻿version: '3.5'
+
+services:
+  mssql-server:
+    restart: always
+    #environment:
+        #ACCEPT_EULA: 'Y'
+        #SA_PASSWORD: Tarek123
+        #MSSQL_PID: Express
+    env_file:
+        - mssql-server.env
+    ports:
+      - 1433:1433
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    volumes:
+      - mssql-server-volume:/var/lib/mysql   
+  mvc-app:
+    # environment:
+    #   MongoDB__Host: mongo
+    #   MongoDB__Port: 27017
+    # build: .
+    image: titario/crudmvcapp:1.0
+    restart: always
+    ports:
+      - "4443:80"
+    depends_on:
+      - mssql-server
+    #image: titario/mongo-repository-example:1.0
+
+volumes:
+  mssql-server-volume:
