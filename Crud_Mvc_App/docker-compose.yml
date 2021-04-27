@@ -19,6 +19,8 @@ services:
     #   MongoDB__Host: mongo
     #   MongoDB__Port: 27017
     # build: .
+    env_file: 
+      - crud-mvc-app.env
     image: titario/crudmvcapp:1.0
     restart: always
     ports:
