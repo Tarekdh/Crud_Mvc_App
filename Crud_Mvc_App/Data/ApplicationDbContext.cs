@@ -11,6 +11,7 @@ namespace Crud_Mvc_App.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+            this.Database.EnsureCreated();
         }
 
         public DbSet<Product> Products { get; set; }
